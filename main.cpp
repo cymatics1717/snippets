@@ -99,6 +99,11 @@ void stepping(std::string context,int v, int h, int n){
     }
 }
 
+void printParenthesesList(int n){
+    if(n<1) return;
+    stepping("",1,1,n+1);
+}
+
 int main()
 {
     {
@@ -114,7 +119,7 @@ int main()
         std::cout <<test<<":\t"<< runlengthDecode(test)<< std::endl;
     }
 
-    stepping("",1,1,5);
+    printParenthesesList(5);
 
     return 0;
 }
