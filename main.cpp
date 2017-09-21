@@ -85,32 +85,7 @@ std::string runlengthDecode(const std::string &in){
 
 void printParenthesesList(size_t n){
     static std::vector<std::vector<std::string> > buf = {{"9"},{"()"}};
-    std::cout << std::endl;
-    if(n<1){
-        std::cout <<""<<std::endl;
-        return;
-    } else if(n==1){
-        std::cout <<"()"<<std::endl;
-        std::cout <<std::string(30,'=')<<1<<","<<1<<std::endl;
-        return;
-    }
-
-    std::vector<std::string> buf_n;
-    if(buf.size() == n){
-        /////////////////////////////
-        for(size_t i=0;i<n;++i){
-            for(size_t j=0;j<buf.at(i).size();++j){
-                for(size_t k=0;k<buf.at(n-1-i).size();++k){
-                    std::string one = buf.at(i).at(j).append(buf.at(n-1-i).at(k));
-//                    if(j==0&&k==0) one = "("+one + ")";
-                    buf_n.push_back(one);
-                    std::cout<< one<<std::endl;
-                }
-            }
-        }
-        buf.push_back(buf_n);
-        std::cout <<std::string(30,'=')<<buf.size()-1<<","<<buf_n.size()<<std::endl;
-    }
+    
 }
 
 int main()
