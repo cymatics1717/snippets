@@ -83,25 +83,20 @@ std::string runlengthDecode(const std::string &in){
     return buf;
 }
 
-void stepping(std::string context,int v, int h, int n){
+void printParenthesesList(std::string context,int v, int h, int n){
     static int cnt = 0;
     if(v==h){
        if(v<n){
-           stepping(context+"(",v, h+1,n);
+           printParenthesesList(context+"(",v, h+1,n);
        } else {
            std::cout<<++cnt<<":" << context <<std::endl;
        }
     } else {
         if(h<n){
-            stepping(context+"(",v, h+1,n);
+            printParenthesesList(context+"(",v, h+1,n);
         }
-        stepping(context+")",v+1, h,n);
+        printParenthesesList(context+")",v+1, h,n);
     }
-}
-
-void printParenthesesList(int n){
-    if(n<1) return;
-    stepping("",1,1,n+1);
 }
 
 int main()
@@ -119,7 +114,7 @@ int main()
         std::cout <<test<<":\t"<< runlengthDecode(test)<< std::endl;
     }
 
-    printParenthesesList(5);
+    printParenthesesList("",0,0,10);
 
     return 0;
 }
