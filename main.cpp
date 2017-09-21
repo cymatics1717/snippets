@@ -86,37 +86,19 @@ std::string runlengthDecode(const std::string &in){
     return buf;
 }
 
-void printParenthesesList(size_t n){
-    static std::vector<std::vector<std::string> > buf = {{"()"}};
-//    std::cout << std::endl<<std::string(50,'=')<<buf.size()<<std::endl;
-    if(n<1){
-        std::cout <<""<<std::endl;
-        return;
-    } else if(n==1){
-        std::cout <<"()"<<std::endl;
-        return;
-    }
-    if(buf.size() == n-1){
-
-        /////////////////////////////
-        std::vector<std::string> buf_n;
-        for(size_t i=0;i<buf.at(n-2).size();++i){
-            std::string one = "(" + buf.at(n-2).at(i) + ")";
-            buf_n.push_back(one);
-            std::cout<< one<<std::endl;
+void stepping(std::string context,int v, int h, int n){
+    static int cnt = 0;
+    if(v==h){
+       if(v<n){
+           stepping(context+"(",v, h+1,n);
+       } else {
+           std::cout<<++cnt<<":" << context <<std::endl;
+       }
+    } else {
+        if(h<n){
+            stepping(context+"(",v, h+1,n);
         }
-        /////////////////////////////
-        for(size_t i=0;i<n-2;++i){
-            for(size_t j=0;j<buf.at(i).size();++j){
-                for(size_t k=0;k<buf.at(n-2-i).size();++k){
-                    std::string one = buf.at(i).at(j).append(buf.at(n-2-i).at(k));
-                    buf_n.push_back(one);
-                    std::cout<< one<<std::endl;
-                }
-            }
-        }
-        buf.push_back(buf_n);
-        std::cout <<std::string(30,'=')<<buf_n.size()<<std::endl;
+        stepping(context+")",v+1, h,n);
     }
 }
 
@@ -135,7 +117,6 @@ int main()
         std::cout <<test<<":\t"<< runlengthDecode(test)<< std::endl;
     }
 
-    for(size_t i=1;i<7;++i)
-        printParenthesesList(i);
+    stepping("",1,1,5);
     return 0;
 }
