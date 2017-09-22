@@ -89,12 +89,12 @@ void printParenthesesList(std::string context,int v, int h, int n){
         printParenthesesList(context+"(",v, h+1,n);
     }
 
-    if(v==h){
-       if(v==n) {
-           std::cout<<++cnt<<":" << context <<std::endl;
-       }
-    } else {
+    if(v<h){
         printParenthesesList(context+")",v+1, h,n);
+    } else {
+        if(v==n) {
+            std::cout<<++cnt<<":" << context <<std::endl;
+        }
     }
 }
 
